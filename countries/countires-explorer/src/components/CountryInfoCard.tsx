@@ -6,6 +6,7 @@ interface Country {
   };
   flags: {
     png: string;
+    alt?: string;
   };
   population: number;
   region: string;
@@ -17,13 +18,18 @@ interface CountryInfoCardProps {
 }
 
 export default function CountryInfoCard({ country }: CountryInfoCardProps) {
+  const flagAltText = country.flags.alt || `Flag of ${country.name.common}`;
+
   return (
     <div className="country-card">
-      <img
-        src={country.flags.png}
-        alt={`Flag of ${country.name.common}`}
-        className="country-flag"
-      />
+      <div className="flag-container">
+        <img
+          src={country.flags.png}
+          alt={flagAltText}
+          className="country-flag"
+        />
+        <div className="flag-tooltip">{flagAltText}</div>
+      </div>
       <div className="country-info">
         <h2>{country.name.common}</h2>
         <p>
