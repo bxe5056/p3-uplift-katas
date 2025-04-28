@@ -33,8 +33,22 @@ describe("CountryList", () => {
     const flag = screen.getByRole("img", { name: /flag of test country/i });
     expect(flag).toHaveAttribute("src", "test-flag.png");
 
-    expect(screen.getByText(/Population: 1,000,000/)).toBeInTheDocument();
-    expect(screen.getByText(/Region: Test Region/)).toBeInTheDocument();
-    expect(screen.getByText(/Capital: Test Capital/)).toBeInTheDocument();
+    expect(
+      screen.getByText((_content, element) => {
+        return element?.textContent === "Population: 1,000,000";
+      })
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText((_content, element) => {
+        return element?.textContent === "Region: Test Region";
+      })
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText((_content, element) => {
+        return element?.textContent === "Capital: Test Capital";
+      })
+    ).toBeInTheDocument();
   });
 });
