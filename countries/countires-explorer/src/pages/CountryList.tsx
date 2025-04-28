@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./CountryList.css";
 
 interface Country {
   name: {
@@ -33,11 +34,11 @@ export default function CountryList() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   return (
-    <div className="country-list" data-testid="country-list">
+    <div className="country-list">
       {countries.map((country) => (
         <div key={country.name.common} className="country-card">
           <img
@@ -45,10 +46,18 @@ export default function CountryList() {
             alt={`Flag of ${country.name.common}`}
             className="country-flag"
           />
-          <h2>{country.name.common}</h2>
-          <p>Population: {country.population.toLocaleString()}</p>
-          <p>Region: {country.region}</p>
-          <p>Capital: {country.capital?.[0] || "N/A"}</p>
+          <div className="country-info">
+            <h2>{country.name.common}</h2>
+            <p>
+              <strong>Population:</strong> {country.population.toLocaleString()}
+            </p>
+            <p>
+              <strong>Region:</strong> {country.region}
+            </p>
+            <p>
+              <strong>Capital:</strong> {country.capital?.[0] || "N/A"}
+            </p>
+          </div>
         </div>
       ))}
     </div>
