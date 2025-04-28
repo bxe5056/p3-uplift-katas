@@ -1,5 +1,14 @@
+import CountryList from "./pages/CountryList";
+
 export default function App() {
   return (
-    <h1 style={{ textAlign: 'center' }}>Dev goes here</h1>
+    <div className="app">
+      <header>
+        <h1 style={{ textAlign: "center" }}>Countries Explorer</h1>
+      </header>
+      <main>
+        <CountryList />
+      </main>
+    </div>
   );
 }
