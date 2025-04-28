@@ -7,7 +7,7 @@ const allCountriesHandler = http.get("https://restcountries.com/v3.1/all", () =>
   HttpResponse.json([])
 );
 
-const server = setupServer(allCountriesHandler);
+export const server = setupServer(allCountriesHandler);
 
 beforeAll(() => {
   server.listen();

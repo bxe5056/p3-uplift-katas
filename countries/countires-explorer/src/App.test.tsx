@@ -1,18 +1,28 @@
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { vi } from "vitest";
 import App from "./App";
 
+// Mock the CountryList component
+vi.mock("./pages/CountryList", () => {
+  return {
+    default: function MockCountryList() {
+      return <div data-testid="country-list">Mock Country List</div>;
+    },
+  };
+});
+
 describe("App", () => {
-  it("renders the heading", () => {
+  it("renders the header with correct title", () => {
     render(<App />);
-    const headingElement = screen.getByRole("heading", { level: 1 });
-    expect(headingElement).toBeInTheDocument();
-    expect(headingElement).toHaveTextContent("Dev goes here");
+    const header = screen.getByRole("heading", { level: 1 });
+    expect(header).toBeInTheDocument();
+    expect(header).toHaveTextContent("Countries Explorer");
+    expect(header).toHaveStyle({ textAlign: "center" });
   });
 
-  it("has centered text alignment", () => {
+  it("renders the CountryList component", () => {
     render(<App />);
-    const headingElement = screen.getByRole("heading", { level: 1 });
-    expect(headingElement).toHaveStyle({ textAlign: "center" });
+    const countryList = screen.getByTestId("country-list");
+    expect(countryList).toBeInTheDocument();
   });
 });
