@@ -1,0 +1,31 @@
+.country-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.country-card:hover {
+  transform: translateY(-4px);
+}
+
+.country-flag {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.country-info {
+  padding: 1.5rem;
+}
+
+.country-info h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+}
+
+.country-info p {
+  margin: 0.5rem 0;
+  color: #666;
+} 
