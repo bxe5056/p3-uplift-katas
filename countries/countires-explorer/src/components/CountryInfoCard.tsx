@@ -21,7 +21,7 @@ export default function CountryInfoCard({ country }: CountryInfoCardProps) {
   const flagAltText = country.flags.alt || `Flag of ${country.name.common}`;
 
   return (
-    <div className="country-card">
+    <div className="country-card" data-testid="country-card">
       <div className="flag-container">
         <img
           src={country.flags.png}
