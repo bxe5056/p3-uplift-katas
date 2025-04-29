@@ -47,9 +47,51 @@
   padding: 1.5rem;
 }
 
+.country-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  min-height: 28px;
+}
+
 .country-info h2 {
-  margin: 0 0 1rem 0;
+  margin: 0;
   font-size: 1.25rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.map-link {
+  color: #333;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  align-self: center;
+  flex-shrink: 0;
+  position: relative;
+  margin-top: -15px;
+}
+
+.map-link:hover {
+  transform: scale(1.1);
+  background-color: #e0e0e0;
+  color: #e74c3c;
+}
+
+.map-icon {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 0;
 }
 
 .country-info p {
