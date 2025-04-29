@@ -7,6 +7,10 @@ const mockCountry = {
   population: 1000000,
   region: "Test Region",
   capital: ["Test Capital"],
+  maps: {
+    googleMaps: "https://goo.gl/maps/TestCountryLink",
+    openStreetMaps: "https://www.openstreetmap.org/relation/TestCountry",
+  },
 };
 
 describe("CountryInfoCard", () => {
@@ -83,6 +87,47 @@ describe("CountryInfoCard", () => {
     const tooltip = screen.getByText("Flag of Test Country");
     expect(tooltip).toBeInTheDocument();
     expect(tooltip).toHaveClass("flag-tooltip");
+
+    consoleSpy.mockRestore();
+  });
+
+  it("uses Google Maps URL from API when available", () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    render(<CountryInfoCard country={mockCountry} />);
+
+    const mapsLink = screen.getByTestId("google-maps-link");
+    expect(mapsLink).toBeInTheDocument();
+    expect(mapsLink).toHaveAttribute(
+      "href",
+      "https://goo.gl/maps/TestCountryLink"
+    );
+    expect(mapsLink).toHaveAttribute("target", "_blank");
+    expect(mapsLink).toHaveAttribute("rel", "noopener noreferrer");
+
+    const mapIcon = mapsLink.querySelector("svg");
+    expect(mapIcon).toBeInTheDocument();
+    expect(mapIcon).toHaveClass("map-icon");
+
+    consoleSpy.mockRestore();
+  });
+
+  it("falls back to constructed Google Maps URL when API URL is not available", () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const countryWithoutMaps = {
+      ...mockCountry,
+      maps: undefined,
+    };
+
+    render(<CountryInfoCard country={countryWithoutMaps} />);
+
+    const mapsLink = screen.getByTestId("google-maps-link");
+    expect(mapsLink).toBeInTheDocument();
+    expect(mapsLink).toHaveAttribute(
+      "href",
+      "https://www.google.com/maps/search/Test%20Country"
+    );
 
     consoleSpy.mockRestore();
   });
